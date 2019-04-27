@@ -4,7 +4,7 @@
 % Distributed under the terms of the MIT License. See the LICENSE file.
 %
 -module(ntlm_httpc).
--export([request/3]).
+-export([request/3, request_basic/3, request_ntlm/3]).
 
 request(Method, Request, Credentials) ->
     Request2 = request_add_header(Request,
@@ -22,7 +22,7 @@ request(Method, Request, Credentials) ->
 request_basic(Method, Request, Credentials) ->
     {_Workstation, _DomainName, UserName, Password} = Credentials,
     Request2 = request_add_header(Request,
-        {"Authorization", "Basic " ++ base64:encode_to_string(lists:concat(UserName, ":", Password))}),
+        {"Authorization", "Basic " ++ base64:encode_to_string(UserName ++ ":" ++ Password)}),
     httpc:request(Method, Request2, [], [{body_format, binary}]).
 
 request_ntlm(Method, Request, Credentials) ->

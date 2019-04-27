@@ -14,7 +14,7 @@ negotiate() ->
         % NEGOTIATE flags in the little endian byte-order
         0:1, % NTLMSSP_NEGOTIATE_LM_KEY
         0:1, % NTLMSSP_NEGOTIATE_DATAGRAM
-        0:1, % NTLMSSP_NEGOTIATE_SEAL
+        1:1, % NTLMSSP_NEGOTIATE_SEAL
         0:1, % NTLMSSP_NEGOTIATE_SIGN
         0:1, % (unused)
         1:1, % NTLMSSP_REQUEST_TARGET
